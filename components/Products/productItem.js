@@ -28,10 +28,12 @@ const ProductItem = ({ product }) => {
       // Add the item to the wishlist
       wishlistItems.push(newCartItem);
       setIsInWishlist(true);
+      toast.success("Product added in wish list successfully!");
     } else {
       // Remove the item from the wishlist
       wishlistItems.splice(itemIndex, 1);
       setIsInWishlist(false);
+      toast.error("Product removed from wish list");
     }
 
     // Update the wishlist in localStorage

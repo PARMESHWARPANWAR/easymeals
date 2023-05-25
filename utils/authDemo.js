@@ -1,11 +1,11 @@
 export function signUp({ name, email, password }) {
   if (name === undefined || name === "") {
-    return { err: true, message: "Name field should be empty" };
+    return { err: true, message: "Name field should not be empty" };
   } else if (email === undefined || email === "") {
-    return { err: true, message: "Email field should be empty" };
+    return { err: true, message: "Email field should not be empty" };
   }
   if (password === undefined || password === "") {
-    return { err: true, message: "Password field should be empty" };
+    return { err: true, message: "Password field should not be empty" };
   }
   const usersList = localStorage.getItem("usersList")
     ? JSON.parse(localStorage.getItem("usersList"))
@@ -44,10 +44,10 @@ export function getUserData() {
 
 export function login({ email, password }) {
   if (email === undefined || email === "") {
-    return { err: true, message: "Email field should be empty" };
+    return { err: true, message: "Email field should not be empty" };
   }
   if (password === undefined || password === "") {
-    return { err: true, message: "Password field should be empty" };
+    return { err: true, message: "Password field should not be empty" };
   }
 
   const usersList = localStorage.getItem("usersList")
