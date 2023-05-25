@@ -16,13 +16,15 @@ import {
 const HeaderMain = () => {
   return (
     <nav className="flex justify-between items-center border-y border-gray-300 py-2 px-4">
-      <ul className="flex items-center space-x-4">
-        <li className="text-gray-700 cursor-pointer">HOME</li>
-        <li className="text-gray-700 cursor-pointer">CATEGORIES</li>
-        <li className="text-gray-700 cursor-pointer">RECIPES</li>
-        <li className="text-gray-700 cursor-pointer">CONTACT</li>
-        <li className="text-gray-700 cursor-pointer">ABOUT</li>
-      </ul>
+      <Link href={`/`}>
+        <ul className="flex items-center space-x-4">
+          <li className="text-gray-700 cursor-pointer">HOME</li>
+          <li className="text-gray-700 cursor-pointer">CATEGORIES</li>
+          <li className="text-gray-700 cursor-pointer">RECIPES</li>
+          <li className="text-gray-700 cursor-pointer">CONTACT</li>
+          <li className="text-gray-700 cursor-pointer">ABOUT</li>
+        </ul>
+      </Link>
 
       <ul className="flex items-center space-x-2">
         <li>

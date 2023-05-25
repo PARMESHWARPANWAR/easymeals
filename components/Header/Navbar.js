@@ -38,34 +38,24 @@ function Navbar() {
 
   return (
     <nav className="flex justify-between items-center bg-black py-2 px-28">
-      <ul className="flex">
-        <li className="mr-4">
-          <a href="#" className="nav-link text-gray-400 hover:text-white">
+      <Link href={`/`}>
+        <ul className="flex">
+          <li className="mr-4 nav-link text-gray-400 hover:text-white">
             Forum
-          </a>
-        </li>
-        <li className="mr-4">
-          <a href="#" className="nav-link text-gray-400 hover:text-white">
+          </li>
+          <li className="mr-4 nav-link text-gray-400 hover:text-white">
             Categories
-          </a>
-        </li>
-        <li className="mr-4">
-          <a href="#" className="nav-link text-gray-400 hover:text-white">
+          </li>
+          <li className="mr-4 nav-link text-gray-400 hover:text-white">
             Books
-          </a>
-        </li>
-        <li className="mr-4">
-          <a href="#" className="nav-link text-gray-400 hover:text-white">
+          </li>
+          <li className="mr-4 nav-link text-gray-400 hover:text-white">
             Recipe Index
-          </a>
-        </li>
+          </li>
 
-        <li>
-          <a href="#" className="nav-link text-gray-400 hover:text-white">
-            Popular
-          </a>
-        </li>
-      </ul>
+          <li className="nav-link text-gray-400 hover:text-white">Popular</li>
+        </ul>
+      </Link>
       <ul className="flex">
         <Link href={`/register`}>
           <li className="mr-2">
