@@ -216,7 +216,7 @@ export const products = [
     name: "Vegetable Stir Fry",
     type: "Asian",
     price: "20",
-    categories: ["Category B"],
+    categories: ["Category C"],
     filters: ["Dietary", "Lunch", "Vegetarian"],
     image:
       "https://recipesblob.oetker.in/assets/d8a4b00c292a43adbb9f96798e028f01/1272x764/pizza-pollo-arrostojpg.webp",
