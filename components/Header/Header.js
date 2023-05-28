@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { Search, Favorite, ShoppingCart } from "@mui/icons-material";
+import { Search, ShoppingCart } from "@mui/icons-material";
 import { categories } from "@/pages/api/filters";
 import { useEffect, useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { FilterContext } from "../../context/FilterContext";
 
-const Header = ({ category, keyword, setCategory, setKeyword }) => {
+const Header = () => {
+  const { keyword, setKeyword, category, setCategory } =
+    useContext(FilterContext);
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };

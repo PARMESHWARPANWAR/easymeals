@@ -1,10 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { products } from "@/pages/api/DemmyData/restaurantsData";
 import ProductItem from "@/components/Products/productItem";
+import { FilterContext } from "../../context/FilterContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Products = ({ keyword, category, selectedFilters }) => {
+const Products = () => {
+  const { keyword, category, selectedFilters } = useContext(FilterContext);
   const [foodsList, setFoodsList] = useState([]);
 
   useEffect(() => {

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   seasons,
   dietaryOptions,
@@ -6,8 +5,22 @@ import {
   sweetOptions,
 } from "@/pages/api/filters";
 import { Search } from "@mui/icons-material";
+import { FilterContext } from "../context/FilterContext";
 
-const Sidebar = ({ keyword, handleFilterChange, setKeyword }) => {
+const Sidebar = () => {
+  const { keyword, setKeyword, selectedFilters, setSelectedFilters } =
+    useContext(FilterContext);
+
+  const handleFilterChange = (filter) => {
+    const isSelected = selectedFilters.includes(filter);
+
+    if (isSelected) {
+      setSelectedFilters(selectedFilters.filter((item) => item !== filter));
+    } else {
+      setSelectedFilters([...selectedFilters, filter]);
+    }
+  };
+
   const searchSubmitHandler = () => {
     setKeyword(keywordSearch);
   };
