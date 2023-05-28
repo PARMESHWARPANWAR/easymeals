@@ -1,5 +1,6 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import { products } from "@/pages/api/DemmyData/restaurantsData";
+// import { products } from "@/pages/api/DemmyData/restaurantsData";
+import { products } from "@/pages/api/DemmyData/productsData";
 import ProductItem from "@/components/Products/productItem";
 import { FilterContext } from "../../context/FilterContext";
 import { toast } from "react-toastify";

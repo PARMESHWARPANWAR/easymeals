@@ -1,9 +1,21 @@
 // Sample data for filters
 export const categories = [
   "All Categories",
-  "Category A",
-  "Category B",
-  "Category C",
+  "Appetizers",
+  "Main Course",
+  "Desserts",
+  "Beverages",
+  "Salads",
+  "Sandwiches",
+  "Soups",
+  "Pizzas",
+  "Pasta",
+  "Seafood",
+  "Vegetarian",
+  "Vegan",
+  "Gluten-free",
+  "Steaks",
+  "Burgers",
 ];
 
 export const seasons = ["Spring", "Summer", "Autumn", "Winter"];

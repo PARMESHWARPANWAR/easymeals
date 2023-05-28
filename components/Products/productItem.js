@@ -56,7 +56,7 @@ const ProductItem = ({ product }) => {
     <>
       <div className="max-w-xs rounded overflow-hidden shadow-lg bg-gray-300">
         <Link href={`/products/${product.id}`}>
-          <img className="w-full" src={image} alt={name} />
+          <img className="w-full w-full" src={image} alt={name} />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{name}</div>
           </div>
