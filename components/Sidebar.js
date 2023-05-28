@@ -6,6 +6,7 @@ import {
 } from "@/pages/api/filters";
 import { Search } from "@mui/icons-material";
 import { FilterContext } from "../context/FilterContext";
+import { useContext } from "react";
 
 const Sidebar = () => {
   const { keyword, setKeyword, selectedFilters, setSelectedFilters } =

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Search, ShoppingCart } from "@mui/icons-material";
 import { categories } from "@/pages/api/filters";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { FilterContext } from "../../context/FilterContext";
 

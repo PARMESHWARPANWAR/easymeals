@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { products } from "@/pages/api/DemmyData/restaurantsData";
 import ProductItem from "@/components/Products/productItem";
 import { FilterContext } from "../../context/FilterContext";
