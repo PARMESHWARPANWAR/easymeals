@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { products } from "@/pages/api/DummyData/productsData";
 import { restaurants } from "@/pages/api/DummyData/restaurantsData";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Rating } from "@mui/lab";
 import {
   Dialog,
@@ -23,20 +23,36 @@ const ProductDetails = () => {
   const { id } = router.query;
 
   // Find the product with the matching id
-  const product = products.find((product) => product.id === id);
+  const product = products.find((product) => product.id == id);
   let restaurant = null;
-
-  if (product) {
-    restaurant = restaurants.find(
-      (restaurant) => restaurant.id === product.restaurantId
-    );
-  }
-  const options = {
+  let options = {
     size: "large",
     value: product?.rating,
     readOnly: true,
     precision: 0.5,
   };
+  useEffect(() => {
+    if (product) {
+      let avgRating =
+        product.reviews
+          .map((review) => review.rating)
+          .reduce((sum, rating) => sum + rating, 0) / product.reviews?.length;
+      avgRating = avgRating ? avgRating.toFixed(2) : 0;
+      product["rating"] = Number(avgRating);
+
+      restaurant = restaurants.find(
+        (restaurant) => restaurant.id === product.restaurantId
+      );
+      console.log("product=>", product, id, products[15].id);
+    }
+    options = {
+      size: "large",
+      value: product?.rating,
+      readOnly: true,
+      precision: 0.5,
+    };
+  }, [product]);
+
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
@@ -89,7 +105,6 @@ const ProductDetails = () => {
 
       existingCartItems.push(newCartItem);
     }
-    console.log(existingCartItems);
     // Save the updated cart in localStorage
     localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
     toast.success(`Item Added To Cart`);

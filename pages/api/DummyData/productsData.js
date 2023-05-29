@@ -918,6 +918,7 @@ export const products = [
     filters: ["Lunch", "", "Breakfast"],
     image: "http://dummyimage.com/250x180.png/cc0000/ffffff",
     stock: false,
+    rating: 3,
     reviews: [
       {
         id: 1,
