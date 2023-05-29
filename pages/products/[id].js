@@ -225,7 +225,7 @@ const ProductDetails = () => {
           </DialogActions>
         </Dialog>
         {product?.reviews && product?.reviews[0] ? (
-          <div className="flex overflow-auto mb-4 mx-2">
+          <div className="flex overflow-auto mb-4 mx-2 no-scrollbar space-x-4">
             {product?.reviews &&
               product?.reviews.map((review) => (
                 <ReviewCard key={review?.id} review={review} />
