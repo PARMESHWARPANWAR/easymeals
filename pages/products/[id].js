@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
-import { products, restaurants } from "../api/DemmyData/restaurantsData";
+
+import { products } from "@/pages/api/DummyData/products";
+import { restaurants } from "@/pages/api/DummyData/restaurants";
 import { Fragment, useState } from "react";
 import { Rating } from "@mui/lab";
 import {
