@@ -21,16 +21,17 @@ import "react-toastify/dist/ReactToastify.css";
 const ProductDetails = () => {
   const router = useRouter();
   const { id } = router.query;
+  const [options, setOptions] = useState({
+    size: "large",
+    value: 0,
+    readOnly: true,
+    precision: 0.5,
+  });
+  const [restaurant, setRestaurant] = useState();
 
   // Find the product with the matching id
   const product = products.find((product) => product.id == id);
-  let restaurant = null;
-  let options = {
-    size: "large",
-    value: product?.rating,
-    readOnly: true,
-    precision: 0.5,
-  };
+
   useEffect(() => {
     if (product) {
       let avgRating =
@@ -40,17 +41,18 @@ const ProductDetails = () => {
       avgRating = avgRating ? avgRating.toFixed(2) : 0;
       product["rating"] = Number(avgRating);
 
-      restaurant = restaurants.find(
+      let restaurantData = restaurants.find(
         (restaurant) => restaurant.id === product.restaurantId
       );
+      setRestaurant(restaurantData);
       console.log("product=>", product, id, products[15].id);
     }
-    options = {
+    setOptions({
       size: "large",
       value: product?.rating,
       readOnly: true,
       precision: 0.5,
-    };
+    });
   }, [product]);
 
   const [quantity, setQuantity] = useState(1);
@@ -127,7 +129,9 @@ const ProductDetails = () => {
           <div className="w-full md:w-1/2 p-4">
             <div className="">
               <h2 className="text-2xl font-bold mb-1">{product?.name}</h2>
-              <p className="text-gray-500 text-xs">Product # {product?.id}</p>
+              <p className="text-gray-500 text-xs">
+                Restaurant # <strong>{restaurant?.name}</strong>
+              </p>
             </div>
 
             <div className="border-b border-gray-200 w-[70%] mb-4" />
@@ -225,7 +229,7 @@ const ProductDetails = () => {
           </DialogActions>
         </Dialog>
         {product?.reviews && product?.reviews[0] ? (
-          <div className="flex overflow-x-auto mb-4 mx-2 no-scrollbar space-x-4">
+          <div className="flex overflow-x-auto mb-4 mx-2 no-scrollbar space-x-4 h-72">
             {product?.reviews &&
               product?.reviews.map((review) => (
                 <ReviewCard key={review?.id} review={review} />
