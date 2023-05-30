@@ -179,7 +179,11 @@ const ProductDetails = () => {
             </div>
             <div className="mb-4">
               <p className="text-gray-500 mb-1">Description:</p>
-              <p>{product?.description}</p>
+              <p>
+                Join us for an unforgettable culinary adventure where
+                exceptional flavors, warm hospitality, and a passion for food
+                come together to create an extraordinary dining experience.
+              </p>
             </div>
             <button
               onClick={submitReviewToggle}

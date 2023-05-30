@@ -9,7 +9,7 @@ const ReviewCard = ({ review }) => {
   };
 
   return (
-    <div className="rounded-lg shadow-lg p-4 flex flex-col items-center bg-gray-400 w-full">
+    <div className="rounded-lg shadow-lg p-4 flex flex-col items-center bg-gray-400 max-w-72">
       <img
         src="https://i.pinimg.com/736x/59/37/5f/59375f2046d3b594d59039e8ffbf485a.jpg"
         alt="User"
