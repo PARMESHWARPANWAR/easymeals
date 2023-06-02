@@ -85,6 +85,10 @@ const ProductDetails = () => {
   };
 
   const addToCartHandler = () => {
+    if (!product?.stock) {
+      toast.error(`Sorry,Product is not available`);
+      return;
+    }
     //add Product to session store
     const existingCartItems =
       JSON.parse(localStorage.getItem("cartItems")) || [];
