@@ -5,6 +5,8 @@ export const FilterContextProvider = ({ children }) => {
   const [keyword, setKeyword] = useState("");
   const [category, setCategory] = useState("");
   const [selectedFilters, setSelectedFilters] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [wishItems, setWishItems] = useState([]);
 
   return (
     <FilterContext.Provider
@@ -15,6 +17,10 @@ export const FilterContextProvider = ({ children }) => {
         setCategory,
         selectedFilters,
         setSelectedFilters,
+        cartItems,
+        setCartItems,
+        wishItems,
+        setWishItems,
       }}
     >
       {children}

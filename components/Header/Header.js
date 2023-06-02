@@ -6,19 +6,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { FilterContext } from "../../context/FilterContext";
 
 const Header = () => {
-  const { keyword, setKeyword, category, setCategory } =
+  const { keyword, setKeyword, category, setCategory, cartItems, wishItems } =
     useContext(FilterContext);
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
-  const [cartItemsCount, setCartItemsCount] = useState(0);
-  const [wishItemsCount, setWishItemsCount] = useState(0);
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCartItemsCount(cartItems.length);
-    const wishItems = JSON.parse(localStorage.getItem("wishItems")) || [];
-    setWishItemsCount(wishItems.length);
-  }, []);
+
   return (
     <nav className="flex justify-between items-center rounded-md py-2 px-4">
       <Link href={`/`}>
@@ -57,7 +50,7 @@ const Header = () => {
           <FavoriteIcon
             className="text-gray-700"
             style={{
-              color: wishItemsCount > 0 ? "red" : "white",
+              color: wishItems?.length > 0 ? "red" : "white",
             }}
           />
           Favorites
@@ -65,7 +58,7 @@ const Header = () => {
 
         <Link href={`/cart`}>
           <ShoppingCart className="text-gray-700" />
-          cart {`(${cartItemsCount})`}
+          cart {`(${cartItems?.length})`}
         </Link>
       </div>
     </nav>

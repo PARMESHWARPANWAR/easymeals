@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { products } from "@/pages/api/DummyData/productsData";
 import { restaurants } from "@/pages/api/DummyData/restaurantsData";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Rating } from "@mui/lab";
 import {
   Dialog,
@@ -17,8 +17,10 @@ import Header from "@/components/Header/Header";
 import HeaderMain from "@/components/Header/HeaderMain";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FilterContext } from "../../context/FilterContext";
 
 const ProductDetails = () => {
+  const { setCartItems } = useContext(FilterContext);
   const router = useRouter();
   const { id } = router.query;
   const [options, setOptions] = useState({
@@ -108,6 +110,7 @@ const ProductDetails = () => {
       existingCartItems.push(newCartItem);
     }
     // Save the updated cart in localStorage
+    setCartItems(existingCartItems);
     localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
     toast.success(`Item Added To Cart`);
   };
