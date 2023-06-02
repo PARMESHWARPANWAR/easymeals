@@ -4,9 +4,9 @@ import ProductItem from "@/components/Products/productItem";
 import { FilterContext } from "../../context/FilterContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const Products = () => {
-  const { keyword, category, selectedFilters } = useContext(FilterContext);
+  const { keyword, category, selectedFilters, setWishItems, setCartItems } =
+    useContext(FilterContext);
   const [foodsList, setFoodsList] = useState([]);
 
   useEffect(() => {
@@ -32,6 +32,13 @@ const Products = () => {
       setFoodsList(filteredFoods);
     }
   }, [selectedFilters, keyword, category]);
+
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setCartItems(cartItems);
+    const wishItems = JSON.parse(localStorage.getItem("wishItems")) || [];
+    setWishItems(wishItems);
+  }, []);
 
   return (
     <Fragment>

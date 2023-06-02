@@ -1,12 +1,13 @@
 import AppLayout from "@/components/AppLayout";
 import Header from "@/components/Header/Header";
 import HeaderMain from "@/components/Header/HeaderMain";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FilterContext } from "../context/FilterContext";
 
 const WishList = () => {
-  const [wishItems, setWishItems] = useState([]);
+  const { wishItems, setWishItems } = useContext(FilterContext);
 
   const removeItems = (productId) => {
     // Check if the item is already in the wishlist
