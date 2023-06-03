@@ -25,10 +25,6 @@ const WishList = () => {
     }
   };
 
-  useEffect(() => {
-    const wishItems = JSON.parse(localStorage.getItem("wishItems")) || [];
-    setWishItems(wishItems);
-  }, [wishItems]);
   return (
     <AppLayout>
       <Header />

@@ -33,13 +33,6 @@ const Products = () => {
     }
   }, [selectedFilters, keyword, category]);
 
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCartItems(cartItems);
-    const wishItems = JSON.parse(localStorage.getItem("wishItems")) || [];
-    setWishItems(wishItems);
-  }, []);
-
   return (
     <Fragment>
       {false ? (

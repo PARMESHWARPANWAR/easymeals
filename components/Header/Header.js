@@ -53,7 +53,7 @@ const Header = () => {
               color: wishItems?.length > 0 ? "red" : "white",
             }}
           />
-          Favorites
+          Favorites{`(${wishItems?.length})`}
         </Link>
 
         <Link href={`/cart`}>

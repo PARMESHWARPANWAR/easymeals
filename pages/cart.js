@@ -23,11 +23,6 @@ const Cart = () => {
     }
   };
 
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCartItems(cartItems);
-  }, []);
-
   return (
     <AppLayout>
       <Header />
