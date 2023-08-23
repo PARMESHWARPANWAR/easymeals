@@ -1,12 +1,14 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FilterContext } from "../../context/FilterContext";
 const ProductItem = ({ product }) => {
   const productId = product?.id;
   const { name, image, stock } = product;
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const { setWishItems } = useContext(FilterContext);
 
   const handleToggleWishlist = () => {
     // Check if the item is already in the wishlist
@@ -37,6 +39,7 @@ const ProductItem = ({ product }) => {
     }
 
     // Update the wishlist in localStorage
+    setWishItems(wishlistItems);
     localStorage.setItem("wishItems", JSON.stringify(wishlistItems));
   };
 
@@ -56,7 +59,7 @@ const ProductItem = ({ product }) => {
     <>
       <div className="max-w-xs rounded overflow-hidden shadow-lg bg-gray-300">
         <Link href={`/products/${product.id}`}>
-          <img className="w-full" src={image} alt={name} />
+          <img className="w-full w-full" src={image} alt={name} />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{name}</div>
           </div>

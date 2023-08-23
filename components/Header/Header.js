@@ -1,21 +1,17 @@
 import Link from "next/link";
-import { Search, Favorite, ShoppingCart } from "@mui/icons-material";
+import { Search, ShoppingCart } from "@mui/icons-material";
 import { categories } from "@/pages/api/filters";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { FilterContext } from "../../context/FilterContext";
 
-const Header = ({ category, keyword, setCategory, setKeyword }) => {
+const Header = () => {
+  const { keyword, setKeyword, category, setCategory, cartItems, wishItems } =
+    useContext(FilterContext);
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
   };
-  const [cartItemsCount, setCartItemsCount] = useState(0);
-  const [wishItemsCount, setWishItemsCount] = useState(0);
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCartItemsCount(cartItems.length);
-    const wishItems = JSON.parse(localStorage.getItem("wishItems")) || [];
-    setWishItemsCount(wishItems.length);
-  }, []);
+
   return (
     <nav className="flex justify-between items-center rounded-md py-2 px-4">
       <Link href={`/`}>
@@ -54,15 +50,15 @@ const Header = ({ category, keyword, setCategory, setKeyword }) => {
           <FavoriteIcon
             className="text-gray-700"
             style={{
-              color: wishItemsCount > 0 ? "red" : "white",
+              color: wishItems?.length > 0 ? "red" : "white",
             }}
           />
-          Favorites
+          Favorites{`(${wishItems?.length})`}
         </Link>
 
         <Link href={`/cart`}>
           <ShoppingCart className="text-gray-700" />
-          cart {`(${cartItemsCount})`}
+          cart {`(${cartItems?.length})`}
         </Link>
       </div>
     </nav>

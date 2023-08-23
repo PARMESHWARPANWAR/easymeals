@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
+import { FilterContextProvider } from "../context/FilterContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,8 +10,10 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
-      <ToastContainer />
+      <FilterContextProvider>
+        <Component {...pageProps} />
+        <ToastContainer />
+      </FilterContextProvider>
     </SessionProvider>
   );
 }

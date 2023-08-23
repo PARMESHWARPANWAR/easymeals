@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
-import { products, restaurants } from "../api/DemmyData/restaurantsData";
-import { Fragment, useState } from "react";
+
+import { products } from "@/pages/api/DummyData/productsData";
+import { restaurants } from "@/pages/api/DummyData/restaurantsData";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Rating } from "@mui/lab";
 import {
   Dialog,
@@ -15,26 +17,46 @@ import Header from "@/components/Header/Header";
 import HeaderMain from "@/components/Header/HeaderMain";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FilterContext } from "../../context/FilterContext";
 
 const ProductDetails = () => {
+  const { setCartItems } = useContext(FilterContext);
   const router = useRouter();
   const { id } = router.query;
-
-  // Find the product with the matching id
-  const product = products.find((product) => product.id === id);
-  let restaurant = null;
-
-  if (product) {
-    restaurant = restaurants.find(
-      (restaurant) => restaurant.id === product.restaurantId
-    );
-  }
-  const options = {
+  const [options, setOptions] = useState({
     size: "large",
-    value: product?.rating,
+    value: 0,
     readOnly: true,
     precision: 0.5,
-  };
+  });
+  const [restaurant, setRestaurant] = useState();
+
+  // Find the product with the matching id
+  const product = products.find((product) => product.id == id);
+
+  useEffect(() => {
+    if (product) {
+      let avgRating =
+        product.reviews
+          .map((review) => review.rating)
+          .reduce((sum, rating) => sum + rating, 0) / product.reviews?.length;
+      avgRating = avgRating ? avgRating.toFixed(2) : 0;
+      product["rating"] = Number(avgRating);
+
+      let restaurantData = restaurants.find(
+        (restaurant) => restaurant.id === product.restaurantId
+      );
+      setRestaurant(restaurantData);
+      console.log("product=>", product, id, products[15].id);
+    }
+    setOptions({
+      size: "large",
+      value: product?.rating,
+      readOnly: true,
+      precision: 0.5,
+    });
+  }, [product]);
+
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
   const [rating, setRating] = useState(0);
@@ -63,6 +85,10 @@ const ProductDetails = () => {
   };
 
   const addToCartHandler = () => {
+    if (!product?.stock) {
+      toast.error(`Sorry,Product is not available`);
+      return;
+    }
     //add Product to session store
     const existingCartItems =
       JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -87,8 +113,8 @@ const ProductDetails = () => {
 
       existingCartItems.push(newCartItem);
     }
-    console.log(existingCartItems);
     // Save the updated cart in localStorage
+    setCartItems(existingCartItems);
     localStorage.setItem("cartItems", JSON.stringify(existingCartItems));
     toast.success(`Item Added To Cart`);
   };
@@ -110,7 +136,9 @@ const ProductDetails = () => {
           <div className="w-full md:w-1/2 p-4">
             <div className="">
               <h2 className="text-2xl font-bold mb-1">{product?.name}</h2>
-              <p className="text-gray-500 text-xs">Product # {product?.id}</p>
+              <p className="text-gray-500 text-xs">
+                Restaurant # <strong>{restaurant?.name}</strong>
+              </p>
             </div>
 
             <div className="border-b border-gray-200 w-[70%] mb-4" />
@@ -158,7 +186,11 @@ const ProductDetails = () => {
             </div>
             <div className="mb-4">
               <p className="text-gray-500 mb-1">Description:</p>
-              <p>{product?.description}</p>
+              <p>
+                Join us for an unforgettable culinary adventure where
+                exceptional flavors, warm hospitality, and a passion for food
+                come together to create an extraordinary dining experience.
+              </p>
             </div>
             <button
               onClick={submitReviewToggle}
@@ -208,7 +240,7 @@ const ProductDetails = () => {
           </DialogActions>
         </Dialog>
         {product?.reviews && product?.reviews[0] ? (
-          <div className="flex overflow-auto mb-4 mx-2">
+          <div className="flex overflow-x-auto mb-4 mx-2 no-scrollbar space-x-4 h-72">
             {product?.reviews &&
               product?.reviews.map((review) => (
                 <ReviewCard key={review?.id} review={review} />
