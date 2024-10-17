@@ -1,4 +1,4 @@
-const { render,screen } = require("@testing-library/react")
+const { render,screen, fireEvent } = require("@testing-library/react")
 const { default: Header } = require("../Header/Header")
 const { FilterContextProvider } = require("../../context/FilterContext")
 // import { categories } from "@/pages/api/filters";
@@ -9,4 +9,19 @@ test("Header component test",()=>{
     const btn =  screen.getByRole('button')
 
     expect(btn).toBeInTheDocument();
+})
+
+
+test("Should render cart with 0 item text",()=>{
+    render(
+        <FilterContextProvider>
+            <Header/>
+            {/* <Products/> */}
+            {/* <ToastContainer /> */}
+        </FilterContextProvider>
+    )
+    const text = screen.getByText('cart (0)')
+    // fireEvent.change('Cake')
+
+    expect(text).toBeInTheDocument();
 })
