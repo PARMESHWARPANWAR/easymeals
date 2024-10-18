@@ -57,7 +57,7 @@ const ProductItem = ({ product }) => {
 
   return (
     <>
-      <div className="max-w-xs rounded overflow-hidden shadow-lg bg-gray-300">
+      <div data-testid='ProductItem' className="max-w-xs rounded overflow-hidden shadow-lg bg-gray-300">
         <Link href={`/products/${product.id}`}>
           <img className="w-full w-full" src={image} alt={name} />
           <div className="px-6 py-4">
