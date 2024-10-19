@@ -69,7 +69,7 @@ const ProductItem = ({ product }) => {
             <div className="text-gray-600 text-sm mt-2">
               Preparation Time: 15 mins
             </div>
-            <button onClick={handleToggleWishlist}>
+            <button data-testid='favoriteBtn' onClick={handleToggleWishlist}>
               <FavoriteIcon
                 style={{
                   color: isInWishlist ? "red" : "white",
