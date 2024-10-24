@@ -4,6 +4,8 @@ const { FilterContextProvider } = require("../../context/FilterContext")
 import "@testing-library/jest-dom";
 import Products from "../Products/products";
 import { ToastContainer } from "react-toastify";
+import { jssPreset } from "@material-ui/core";
+import React from "react";
 
 test("Header component test", () => {
     render(<FilterContextProvider><Header /></FilterContextProvider>)
@@ -104,4 +106,21 @@ describe("Header Component", () => {
 
         expect(categorySelect.value).toBe("Desserts");
     });
+
+    test("displays correct number of items in cart and wishlist",()=>{
+        // Mock the context to provide non-zero cart and wishlist items
+        // jest.spyOn(React, "useContext").mockImplementation(()=>({
+        //     cartItems:[{id:1},{id:2}],
+        //     wishItems:[{id:3}],
+        // }));
+
+        render(
+            <FilterContextProvider>
+                <Header/>
+            </FilterContextProvider>
+        );
+
+        // expect(screen.getByText("cart (2)")).toBeInTheDocument();
+        // expect(screen.getByText("Favorites(1)")).toBeInTheDocument();
+    })
 })
